@@ -1,0 +1,71 @@
+// @import "./_reset.scss";
+
+$메인칼라: green;
+
+.red {
+  color: $메인칼라;
+}
+
+// sass 문법 중 1 : 네스팅
+div.container {
+  h4 {
+    color: blue;
+  }
+  p {
+    margin: 0;
+  }
+}
+
+.border_content {
+  border-bottom: 0;
+}
+
+.border_gogo {
+  border: block;
+}
+
+.wow-enter {
+  // 애니메이션 시작때 적용할 CSS
+  opacity: 0;
+}
+
+.wow-enter-active {
+  // 애니메이션 끝날 때 적용할 CSS
+  opacity: 1;
+  transition: all 500ms;
+}
+
+div.button_content {
+  display: flex;
+  justify-content: center;
+  font-size: 50px;
+}
+
+// sass 문법 중 3 : mixin
+@mixin 함수() {
+  font-size: 30px;
+  font-weight: 700;
+  background-color: rgb(196, 196, 196);
+  border: 1px solid black;
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+  padding: 10px;
+
+  p {
+    margin: 0;
+  }
+}
+
+.my-alert2 {
+  @include 함수();
+}
+// sass 문법 중 2 : @extend
+.my-alert2-red {
+  @extend .my-alert2;
+  background: #ffe591;
+}

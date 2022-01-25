@@ -1,10 +1,73 @@
 .App {
+  text-align: right;
+}
+.right {
+  text-align: right;
+}
+
+.container {
+  width: 800px;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.more {
+  margin: auto;
+  display: block;
+  width: 100px;
+  /* width는 더보기의 가로 너비를 말한다. */
+}
+.product {
+  margin: 20px;
+  width: 220px;
+  height: 220px;
+  font-size: 20px;
+  font-weight: 700;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.detail_info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.detail_explain {
+  text-align: center;
+  margin: 20px;
+}
+.detail_explain button {
+  background-color: red;
+  color: white;
+  margin: 20px;
+  border-radius: 5px;
+}
+
+@media screen and (max-width: 980px) {
+  .container {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    display: block;
+  }
+
+  .row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .detail_info {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -26,6 +89,22 @@
 
 .App-link {
   color: #61dafb;
+}
+
+.background {
+  background-color: rgb(196, 196, 196);
+  text-align: center;
+  padding: 20px;
+  background-image: url("./background.jpg");
+  background-size: cover;
+  color: white;
+}
+.learn_button {
+  background-color: rgb(24, 127, 223);
+  width: 200px;
+  border-radius: 5px;
+  color: white;
+  margin: 10px;
 }
 
 @keyframes App-logo-spin {
