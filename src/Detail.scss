@@ -16,14 +16,12 @@ div.container {
   }
 }
 
-.border_content {
+.bottom_line_no {
   border-bottom: 0;
 }
-
-.border_gogo {
-  border: block;
+.bottom_line_yes {
+  border-bottom: 1;
 }
-
 .wow-enter {
   // 애니메이션 시작때 적용할 CSS
   opacity: 0;

@@ -55,7 +55,21 @@ function Detail(props) {
     // 1. 함수를 여러개 만들던가,
     // 2. useEffect를 여러개 적든가
   }, []);
-  useEffect(() => {}, [pushedTab]);
+  useEffect(() => {
+    //useEffect : 마운트, 렌더링될 떄 실행
+    let arr = localStorage.getItem("watched");
+
+    if (arr == null) {
+      arr = [];
+    } else {
+      arr = JSON.parse(arr);
+    }
+
+    arr.push(id);
+    arr = new Set(arr); // 중복된 것을 제거해주는 js문법
+    arr = [...arr]; // 이거 왜하지? 벗겻다가 입힌다 변탠가?
+    localStorage.setItem("watched", JSON.stringify(arr));
+  }, []);
   // 2번째 인자로 update됐을떄의 실행을 막을 수 있음.
   // []만 있으면 처음 mount됐을때만 실행
   // 만약 [alert] 로 돼있으면 alert의 변경만 감지해서 랜더링 실행
@@ -99,10 +113,86 @@ function Detail(props) {
     }
   `;
 
+  const Recent = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+  `;
+
+  const Products = styled.div`
+    text-align: center;
+    position: absolute;
+    right: 30px;
+    top: 60px;
+    background-color: lightgrey;
+    padding: 30px;
+    font-size: 10px;
+    @media screen and (max-width: 980px) {
+      position: absolute;
+      right: 30px;
+      top: 100px;
+    }
+  `;
+  const Option = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  `;
+
+  const Tab = styled.button`
+    padding: 10px 30px;
+    cursor: pointer;
+    opacity: 0.6;
+    background: white;
+    border: 0;
+    outline: 0;
+    border-bottom: 2px solid transparent;
+    transition: ease border-bottom 250ms;
+    ${({ active }) =>
+      active &&
+      `
+      border-bottom: 2px solid black;
+      opacity: 1;
+    `}
+  `;
+
+  const types = ["Option1", "Option2", "Option3"];
+  function TabGroup() {
+    const [active, setActive] = useState(types[0]);
+    return (
+      <>
+        <Option>
+          <div>
+            {types.map((type) => (
+              <Tab
+                key={type}
+                active={active === type}
+                onClick={() => setActive(type)}
+              >
+                {type}
+              </Tab>
+            ))}
+          </div>
+          <p />
+          <p> Your payment selection: {active} </p>
+        </Option>
+      </>
+    );
+  }
+
   return (
     <>
       <div className="detail_info">
-        <Rotate> 🤣🤣🤣🤣 </Rotate>
+        {/* <Recent>
+          <Rotate> 🤣🤣🤣🤣 </Rotate>
+          <Products>
+            <div>최근 본 상품</div>
+            <div>{JSON.parse(localStorage.getItem("watched"))}</div>
+            <div>{찾은상품.title}</div>
+          </Products>
+        </Recent> */}
         <img
           alt="black"
           src={`https://codingapple1.github.io/shop/shoes${Number(id) + 1}.jpg`}
@@ -157,21 +247,22 @@ function Detail(props) {
         </div>
       </div>
       <Button>
-        <div style={{ width: "100vw" }}></div>
+        <TabGroup />
+        {/* <div style={{ width: "100vw" }}></div> */}
 
-        <button
-          className={active === false ? "border_content" : "null"}
+        {/* <button
+          className={active === true ? "bottom_line_no" : "bottom_line_yes"}
           style={{ padding: "20px 50px" }}
           onClick={() => {
             setPushedTab(0);
-            setActive(false);
+            setActive(true);
           }}
         >
           Option1
         </button>
 
         <button
-          className={active === true ? "border_content" : "null"}
+          className={active === true ? "bottom_line_yes" : "bottom_line_no"}
           style={{ padding: "20px 50px" }}
           onClick={() => {
             setPushedTab(1);
@@ -179,7 +270,7 @@ function Detail(props) {
           }}
         >
           Option2
-        </button>
+        </button> */}
 
         {/* <button
           className={active == true ? "border_content" : "null"}
@@ -192,11 +283,11 @@ function Detail(props) {
           Option3
         </button> */}
 
-        <div style={{ width: "100vw" }}></div>
+        {/* <div style={{ width: "100vw" }}></div> */}
       </Button>
       <CSSTransition in={active} classNames="wow" timeout={500}>
         <div className="button_content">
-          <TabContent pushedTab={pushedTab} setActive={setActive} />
+          {/* <TabContent pushedTab={pushedTab} setActive={setActive} /> */}
         </div>
       </CSSTransition>
       {/* {input}
@@ -214,20 +305,19 @@ function Detail(props) {
   );
 }
 
-function TabContent(props) {
-  useEffect(() => {
-    props.setActive(true);
-  });
+// function TabContent(props) {
+//   useEffect(() => {
+//     props.setActive(true);
+//   });
 
-  if (props.pushedTab === 0) {
-    return <div>1</div>;
-  } else if (props.pushedTab === 1) {
-    return <div>2</div>;
-  } else if (props.pushedTab === 2) {
-    return <div>3</div>;
-  }
-}
+//   if (props.pushedTab === 0) {
+//     return <div>1</div>;
+//   } else if (props.pushedTab === 1) {
+//     return <div>2</div>;
+//   }
+// }
 
+// 재고 컴포넌트
 function Left(props) {
   return <p>재고 : {props.left[props.찾은상품.id]}</p>;
 }
