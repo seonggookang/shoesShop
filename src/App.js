@@ -43,7 +43,7 @@ function App() {
                 Home
               </Nav.Link>
               {/* a링크 안에 a링크를 넣을수없다는 에러메시지가 나온다. 위처럼 바꿔주면 된다. 그보다 일단 이 부트스트랩 정말 못생겼다 */}
-              <Nav.Link as={Link} to="/detail">
+              <Nav.Link as={Link} to="/detail/0">
                 Detail
               </Nav.Link>
               {/* <Nav.Link>
