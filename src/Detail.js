@@ -60,14 +60,15 @@ function Detail(props) {
     let arr = localStorage.getItem("watched");
 
     if (arr == null) {
+      // 페이지로 첫진입했을 땐, locatstorage에 아무것도 없는상태
       arr = [];
     } else {
-      arr = JSON.parse(arr);
+      arr = JSON.parse(arr); // 따옴표가 쳐져있는 json 형식을 되돌려놓기위해
     }
 
-    arr.push(id);
+    arr.push(id); // useParams()
     arr = new Set(arr); // 중복된 것을 제거해주는 js문법
-    arr = [...arr]; // 이거 왜하지? 벗겻다가 입힌다 변탠가?
+    arr = [...arr]; // 위에 만들어 놓은 set자료형을 조작하기 쉬운 array로 만듬
     localStorage.setItem("watched", JSON.stringify(arr));
   }, []);
   // 2번째 인자로 update됐을떄의 실행을 막을 수 있음.
@@ -108,9 +109,6 @@ function Detail(props) {
   const Button = styled.div`
     display: flex;
     justify-content: center;
-    div {
-      border-bottom: 1px solid grey;
-    }
   `;
 
   const Recent = styled.div`
@@ -141,13 +139,14 @@ function Detail(props) {
     align-items: center;
   `;
 
+  const types = ["Option1", "Option2", "Option3"];
+
   const Tab = styled.button`
     padding: 10px 30px;
     cursor: pointer;
     opacity: 0.6;
     background: white;
     border: 0;
-    outline: 0;
     border-bottom: 2px solid transparent;
     transition: ease border-bottom 250ms;
     ${({ active }) =>
@@ -158,7 +157,6 @@ function Detail(props) {
     `}
   `;
 
-  const types = ["Option1", "Option2", "Option3"];
   function TabGroup() {
     const [active, setActive] = useState(types[0]);
     return (
@@ -176,7 +174,7 @@ function Detail(props) {
             ))}
           </div>
           <p />
-          <p> Your payment selection: {active} </p>
+          <p> What you chose : {active} </p>
         </Option>
       </>
     );
