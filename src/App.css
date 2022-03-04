@@ -13,22 +13,27 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 48px;
 }
 
 .more {
-  margin: auto;
+  margin: 0 auto;
   display: block;
   width: 100px;
-  /* width는 더보기의 가로 너비를 말한다. */
 }
 .product {
-  margin: 20px;
+  margin: 23px;
   width: 220px;
   height: 220px;
   font-size: 20px;
   font-weight: 700;
   text-align: center;
+  cursor: pointer;
+}
+
+.product:hover {
+  transform: scale(1.1);
+  transition: 0.3s;
 }
 
 .detail_info {
@@ -51,8 +56,8 @@
 @media screen and (max-width: 980px) {
   .container {
     padding: 0;
-    margin: 0;
-    width: 100%;
+
+    width: 100vw;
     display: block;
   }
 

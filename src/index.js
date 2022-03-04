@@ -66,7 +66,6 @@ function reducer(state = 초기값, 액션) {
     // id가 같은 상품의 quan 1증가
 
     let copy = [...state];
-    console.log(액션.payload); // 0, 1
     copy[액션.payload].quan++;
     return copy;
   } else if (액션.type === "수량감소") {

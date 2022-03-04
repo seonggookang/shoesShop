@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useContext, lazy, Suspense } from "react";
+import React, { useState, useContext, lazy, Suspense } from "react";
 import "./App.css";
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import ShoseInfo from "./Shoes";
-import { Link, Route, Routes, Switch } from "react-router-dom";
+import { Link, Route, Switch } from "react-router-dom";
 
 // import Detail from "./Detail";
 
@@ -12,19 +12,21 @@ import axios from "axios";
 // import { Table } from "react-bootstrap";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import Cart from "./Cart.js";
+import UsePractice from "./UsePractice";
 let Detail = lazy(() => import("./Detail"));
 // lazy,suspense를 이용하면 Detail, Cart등의 컴포넌특라 필요할 때 import를 해준다.
 
 export let 재고context = React.createContext();
 // createContext역할 : 같은 변수값을 공유할 범위생성
 // 같은 값을 공유할 HTML을 범위로 감싸기
-// 공유하고 싶은 값을 value={}로 Provider 옆에 기재
+// 공유하고 싶은 state를 value={}로 Provider 옆에 기재
 // 간단한 데이터 전송은 props를 쓰자
+
 function App() {
   let [shoes, setShoes] = useState(ShoseInfo);
   let [loading, setLoading] = useState(false);
   let [left, setLeft] = useState([10, 11, 12]);
-
+  let history = useHistory();
   // 중요한 정보는 최상위 컴포넌트에 넣는다.
   // useEffect(()=>{
   //   function(){
@@ -35,6 +37,13 @@ function App() {
     <div className="App">
       <Navbar bg="light" expand="lg">
         <Container>
+          <div
+            onClick={() => {
+              history.push("/useref");
+            }}
+          >
+            <button>Do you wanna study useRef?</button>
+          </div>
           <Navbar.Brand href="#home">ShoeShop</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
@@ -46,9 +55,7 @@ function App() {
               <Nav.Link as={Link} to="/detail/0">
                 Detail
               </Nav.Link>
-              {/* <Nav.Link>
-                <Link to="/detail"> Detail </Link>
-              </Nav.Link> */}
+
               <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">
@@ -67,6 +74,7 @@ function App() {
         </Container>
       </Navbar>
       {/* Switch 하나 올라가면 다른거 꺼지게 하는 기능. 택 1해주세요. 중복 출연이 안되는거임*/}
+
       <Switch>
         <Route exact path="/">
           <div className="background">
@@ -81,15 +89,12 @@ function App() {
           <div className="container">
             <재고context.Provider value={left}>
               <div className="row">
-                {/* map을 쓸때, jsx안에서  js문법을 쓸때 중괄호좀 써라  */}
                 {shoes.map((shoe, i) => (
                   <Card key={i} shoes={shoes[i]} i={i} />
-                  // *컴포넌트엔 onClick부여하지 않음. 그 컴포넌트에 찾아가서 부여해야함
                 ))}
               </div>
             </재고context.Provider>
 
-            {/* 버튼을 누르면 ajax요청 할거임 */}
             <button
               className="more"
               onClick={() => {
@@ -98,7 +103,7 @@ function App() {
                 setLoading(true);
 
                 // 서버에 데이터 보내고 싶을떄 POST 요청하는 법
-                axios.post("serverURL", { id: "ksg", pw: 1234 });
+                // axios.post("serverURL", { id: "ksg", pw: 1234 });
 
                 // fetch는 json<->object 변환 과정을 거쳐야함
 
@@ -120,6 +125,7 @@ function App() {
                   }) // ajax 요청 성공하면 실행할 코드 작성
                   .catch(() => {
                     // 실패하면 실행할 코드
+
                     setLoading(false);
                     // 로딩중이라는 UI 삭제처리
 
@@ -160,6 +166,10 @@ function App() {
           <Cart />
         </Route>
 
+        <Route exact path="/useref">
+          <UsePractice />
+        </Route>
+
         {/* :id 는 url의 파라미터 */}
         {/* 리액트 라우터의 특징 매칭되면 다 띄워준다. 그걸 방지하고자 Swtich를 씀. 딱 하나만 켜짐 */}
       </Switch>
@@ -168,13 +178,14 @@ function App() {
 }
 
 function Loading(props) {
-  return props.loading == true ? <div>로딩중입니다로딩중입니다</div> : null;
+  return props.loading ? <div>로딩중입니다로딩중입니다</div> : null;
 }
 
 function Card(props) {
   let 재고 = useContext(재고context);
-  let history = useHistory();
+  // 뜻 : 괄호 안의 것(재고context)로 감싸져있는 컴포넌트. 이제 재고라는 state를 사용가능!
   // props 없이 값들을 공유할수 있게됨
+  let history = useHistory();
 
   // let 재고상품 = props.shoes.find((x) => x.id == Number(id) + 1);
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, memo } from "react";
 import { Table } from "react-bootstrap";
-import { connect, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 function Cart(props) {
   // let [open, setOpen] = useState(true);
@@ -11,35 +11,11 @@ function Cart(props) {
 
   let dispatch = useDispatch();
 
-  let [age, setAge] = useState(20);
-  let [count, setCount] = useState(0);
-
-  useEffect(() => {
-    if (count !== 0 && count < 3) {
-      setAge(age + 1);
-    }
-  }, [count]);
-
   return (
     <div>
-      <div>
-        <div>{age}입니다.</div>
-        <button
-          onClick={() => {
-            setCount(count + 1);
-            // if (count <= 2) {
-            //   setAge(age + 1);
-            // }
-          }}
-        >
-          {count}번 눌렀습니다.
-        </button>
-      </div>
-
       <Table>
         <tr>
           <td>#</td>
-          {/* <td>상품명</td> */}
           <td>수량</td>
           <td>변경</td>
         </tr>
