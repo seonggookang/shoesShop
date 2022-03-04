@@ -7,7 +7,7 @@ export default function UsePractice() {
   useEffect(() => {
     renderCount.current += 1;
     console.log("렌더링 수 : ", renderCount.current);
-  }, []);
+  });
 
   return (
     <div>
