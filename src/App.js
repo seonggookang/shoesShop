@@ -10,7 +10,7 @@ import axios from "axios";
 // axios로 인해 ajax가 쉬워진다.
 // axios로 새로고침없이 서버에 요청할 수가있다.
 // import { Table } from "react-bootstrap";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory } from "react-router-dom";
 import Cart from "./Cart.js";
 import UsePractice from "./UsePractice";
 let Detail = lazy(() => import("./Detail"));
@@ -27,12 +27,7 @@ function App() {
   let [loading, setLoading] = useState(false);
   let [left, setLeft] = useState([10, 11, 12]);
   let history = useHistory();
-  // 중요한 정보는 최상위 컴포넌트에 넣는다.
-  // useEffect(()=>{
-  //   function(){
-  //     setLoading(false);
-  //   }
-  // },[loading])
+
   return (
     <div className="App">
       <Navbar bg="light" expand="lg">
@@ -73,7 +68,7 @@ function App() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      {/* Switch 하나 올라가면 다른거 꺼지게 하는 기능. 택 1해주세요. 중복 출연이 안되는거임*/}
+      {/* Switch 중복 출연 막아주는 역할*/}
 
       <Switch>
         <Route exact path="/">
@@ -104,8 +99,6 @@ function App() {
 
                 // 서버에 데이터 보내고 싶을떄 POST 요청하는 법
                 // axios.post("serverURL", { id: "ksg", pw: 1234 });
-
-                // fetch는 json<->object 변환 과정을 거쳐야함
 
                 // Detail page에 들어가자마자 (Detail 컴포넌트로드시) ajax로 데이터를 가져오고싶을때,
 
@@ -169,9 +162,6 @@ function App() {
         <Route exact path="/useref">
           <UsePractice />
         </Route>
-
-        {/* :id 는 url의 파라미터 */}
-        {/* 리액트 라우터의 특징 매칭되면 다 띄워준다. 그걸 방지하고자 Swtich를 씀. 딱 하나만 켜짐 */}
       </Switch>
     </div>
   );
@@ -182,9 +172,11 @@ function Loading(props) {
 }
 
 function Card(props) {
+  console.log("props :", props);
   let 재고 = useContext(재고context);
-  // 뜻 : 괄호 안의 것(재고context)로 감싸져있는 컴포넌트. 이제 재고라는 state를 사용가능!
-  // props 없이 값들을 공유할수 있게됨
+  // 뜻 : Card 컴포넌트는 괄호 안의 것(재고context)로 감싸져있다.
+  // 이제 Card에서도 재고라는 state를 사용가능!
+
   let history = useHistory();
 
   // let 재고상품 = props.shoes.find((x) => x.id == Number(id) + 1);
@@ -206,9 +198,9 @@ function Card(props) {
       />
       <h4>{props.shoes.title}</h4>
       <p>
-        {props.shoes.explain}
+        {props.shoes.content}
         <br />
-        수량:{props.shoes.price}원
+        가격 : {props.shoes.price}원
       </p>
       재고 : {재고[props.i]}
     </div>

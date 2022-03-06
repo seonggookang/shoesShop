@@ -48,13 +48,13 @@ function Detail(props) {
 
   useEffect(() => {
     let arr = localStorage.getItem("watched");
-
     if (arr == null) {
       arr = [];
     } else {
       arr = JSON.parse(arr); // 따옴표가 쳐져있는 json 형식을 되돌려 놓기위해
     }
 
+    console.log("arr : ", arr);
     arr.push(id); // useParams()
     arr = new Set(arr); // 중복된 것을 제거해주는 js문법
     arr = [...arr]; // 위에 만들어 놓은 set자료형을 조작하기 쉬운 array로 만듬
@@ -175,7 +175,7 @@ function Detail(props) {
 
         <div className="detail_explain">
           <div>{찾은상품.title}</div>
-          <div>{찾은상품.explain}</div>
+          <div>{찾은상품.content}</div>
           <div>{찾은상품.price}</div>
           <Left left={props.left} 찾은상품={찾은상품} />
 
