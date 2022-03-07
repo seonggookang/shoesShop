@@ -2,21 +2,53 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 function Scroll2() {
+  let offset = 0;
   const [poketmons, setPoketmon] = useState([]);
 
-  useEffect(() => {
-    const result = async () => {
-      const fetched = await axios("https://pokeapi.co/api/v2/pokemon?limit=10");
-      setPoketmon(fetched.data.results);
-    };
+  const loadMorePokemon = async () => {
+    const fetched = await axios(
+      `https://pokeapi.co/api/v2/pokemon?limit=10&offset=${offset}`
+    );
+    const newPokemon = [];
+    fetched.data.results.map((p) => newPokemon.push(p.name));
+    setPoketmon((oldPokemon) => [...oldPokemon, ...newPokemon]);
+    offset += 10;
+  };
 
-    result();
+  const handleScroll = (e) => {
+    if (
+      e.target.documentElement.scrollTop + window.innerHeight + 1 >=
+      e.target.documentElement.scrollHeight
+    ) {
+      loadMorePokemon();
+    }
+  };
+
+  useEffect(() => {
+    loadMorePokemon();
+    window.addEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <div>
-      {poketmons?.map((poketmon, idx) => {
-        return <div key={idx}>{poketmon.name}</div>; //  Objects are not valid as a React child (key값 이용해서 쓸거써라)
+      {poketmons.map((p, i) => {
+        return (
+          <div
+            key={i}
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              border: "1px solid black",
+              width: "200px",
+              height: "200px",
+              fontWeight: "700",
+              fontSize: "20px",
+            }}
+          >
+            {i + 1}.&nbsp;{p}
+          </div>
+        );
       })}
     </div>
   );
