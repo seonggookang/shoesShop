@@ -19,7 +19,7 @@ function Detail(props) {
   let [active, setActive] = useState(false);
 
   let 찾은상품 = props.shoes.find((x) => x.id == Number(id));
-
+  console.log("찾은상품 :", 찾은상품);
   // return은 객체 하나가 나온다. {...}
   // map, sort, find, filter 배열함수들 공부
 
@@ -176,13 +176,11 @@ function Detail(props) {
         <div className="detail_explain">
           <div>{찾은상품.title}</div>
           <div>{찾은상품.content}</div>
-          <div>{찾은상품.price}</div>
+          <div>{찾은상품.price} 원</div>
           <Left left={props.left} 찾은상품={찾은상품} />
 
           <button
             onClick={() => {
-              let newleft = [...props.left];
-
               let 찾은상품 = props.shoes.find((x) => x.id == Number(id));
 
               props.dispatch({
@@ -226,10 +224,12 @@ function Detail(props) {
 }
 
 function Left(props) {
-  return <p>재고 : {props.left[props.찾은상품.id]}</p>;
+  // return <p>재고 : {props.left[props.찾은상품.id]}</p>;
+  return <p>재고 : {props.찾은상품.left} 개</p>;
 }
 
 function state를props화(state) {
+  // 옛날 문법이니 이거 대신 useSelector 사용하라.
   return {
     state: state.reducer, // state를 state라는 props로 바꿔달라.
     isAlert: state.reducer2,

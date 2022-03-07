@@ -33,7 +33,7 @@ function Cart() {
                 <td>
                   <button
                     onClick={() => {
-                      dispatch({ type: "수량증가", payload: a.id });
+                      dispatch({ type: "수량증가", payload: i });
                       // payload를 통해 "이걸 전달해주세요"
                     }}
                   >
@@ -41,7 +41,7 @@ function Cart() {
                   </button>
                   <button
                     onClick={() => {
-                      dispatch({ type: "수량감소", payload: a.id });
+                      dispatch({ type: "수량감소", payload: i });
                     }}
                   >
                     -

@@ -13,6 +13,8 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import Cart from "./Cart.js";
 import UsePractice from "./UsePractice";
+import Scroll from "./Scroll";
+import Scroll2 from "./Scroll2";
 let Detail = lazy(() => import("./Detail"));
 // lazy,suspense를 이용하면 Detail, Cart등의 컴포넌특라 필요할 때 import를 해준다.
 
@@ -32,13 +34,6 @@ function App() {
     <div className="App">
       <Navbar bg="light" expand="lg">
         <Container>
-          <div
-            onClick={() => {
-              history.push("/useref");
-            }}
-          >
-            <button>Do you wanna study useRef?</button>
-          </div>
           <Navbar.Brand href="#home">ShoeShop</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
@@ -106,19 +101,16 @@ function App() {
                   .get("https://codingapple1.github.io/shop/data2.json")
                   // 데이터 요청할 URL 넣으면됨(이제 새로고침 없이 데이터 가져옴. 이게 바로 ajax 쓰는 이유)
                   .then((result) => {
+                    // ajax요청 성공시 실행코드
                     setLoading(false);
 
-                    // 로딩중이라는 UI 삭제처리
-                    // 파라미터 써주고 출력하면 관련된 성공한 데이터 다 불러옴. 콘솔 찍어보고 필요한거 가져다 쓰면됨.
+                    let newArray = [...shoes];
 
-                    let newArray = [...shoes]; // ...연산자는 괄호를 벗겨준다.
-                    // 윗줄은 ...연산자를 통해 대괄호를 벗겨주고 다시 대괄호로 감싸준상황.
-                    newArray.push(...result.data); // 이걸 배열 벗겨서 넣기만하면..
+                    newArray.push(...result.data);
                     setShoes(newArray);
-                  }) // ajax 요청 성공하면 실행할 코드 작성
+                  })
                   .catch(() => {
-                    // 실패하면 실행할 코드
-
+                    // ajax요청 실패시 실행코드
                     setLoading(false);
                     // 로딩중이라는 UI 삭제처리
 
@@ -133,7 +125,7 @@ function App() {
             변경될 숫자 (data2에서 3이나 4로)로 바꿔주기 위해 해당 숫자부분을 state로 두고 더보기 버튼 클릭할때마다 set변경으로 숫자 변경.
             */}
           </div>
-          <Loading />
+          <Loading loading={loading} />
           <button
             onClick={() => {
               let list = shoes.sort((a, b) => a.price - b.price);
@@ -145,12 +137,33 @@ function App() {
           >
             가격순 정렬하기!!
           </button>
+          <div
+            onClick={() => {
+              history.push("/useref");
+            }}
+          >
+            <button>Do you wanna study useRef?</button>
+          </div>
+          <div
+            onClick={() => {
+              history.push("/scroll");
+            }}
+          >
+            <button>Infinite Scroll!!</button>
+          </div>
+          <div
+            onClick={() => {
+              history.push("/scroll2");
+            }}
+          >
+            <button>Infinite Scroll!! version 2!!</button>
+          </div>
         </Route>
 
         <Route exact path="/detail/:id">
           <재고context.Provider value={left}>
             <Suspense fallback={<div>로딩중입니다</div>}>
-              <Detail shoes={shoes} left={left} setLeft={setLeft} />
+              <Detail shoes={shoes} left={left} />
             </Suspense>
           </재고context.Provider>
         </Route>
@@ -162,26 +175,33 @@ function App() {
         <Route exact path="/useref">
           <UsePractice />
         </Route>
+
+        <Route exact path="/scroll">
+          <Scroll />
+        </Route>
+        <Route exact path="/scroll2">
+          <Scroll2 />
+        </Route>
       </Switch>
     </div>
   );
 }
 
 function Loading(props) {
-  return props.loading ? <div>로딩중입니다로딩중입니다</div> : null;
+  return props.loading ? <div>Loading...</div> : null;
 }
 
 function Card(props) {
   console.log("props :", props);
   let 재고 = useContext(재고context);
+  console.log("재고 : ", 재고);
   // 뜻 : Card 컴포넌트는 괄호 안의 것(재고context)로 감싸져있다.
   // 이제 Card에서도 재고라는 state를 사용가능!
 
   let history = useHistory();
 
-  // let 재고상품 = props.shoes.find((x) => x.id == Number(id) + 1);
-
   // 여기서 해당 재고량을 가져오는 함수를 만들어서 id값이랑 재고의 순번이랑 맞춰서 가져오기
+  console.log(props.shoes.left);
   return (
     <div
       className="product"
@@ -202,7 +222,8 @@ function Card(props) {
         <br />
         가격 : {props.shoes.price}원
       </p>
-      재고 : {재고[props.i]}
+      {/* 재고 : {재고[props.i]} */}
+      재고 : {props.shoes.left}
     </div>
   );
 }

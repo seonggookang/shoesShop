@@ -22,7 +22,8 @@
   width: 100px;
 }
 .product {
-  margin: 23px;
+  margin: 28px 23px;
+  /* padding: 10px; */
   width: 220px;
   height: 220px;
   font-size: 20px;

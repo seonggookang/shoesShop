@@ -64,6 +64,8 @@ function reducer(state = 초기값, 액션) {
     console.log("삭제 누른뒤 copy : ", copy);
     return copy;
   } else if (액션.type === "수량증가") {
+    console.log();
+    // 수량증가 버튼과 동시에 shoes의 값도 영향받게.
     let copy = [...state]; // 독립적인 복사본
     copy[액션.payload].quan++;
     return copy;
