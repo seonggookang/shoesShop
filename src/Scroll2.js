@@ -44,6 +44,7 @@ function Scroll2() {
               height: "200px",
               fontWeight: "700",
               fontSize: "20px",
+              margin: "0 auto",
             }}
           >
             {i + 1}.&nbsp;{p}
