@@ -1,4 +1,4 @@
-import React, { useState, createContext, useContext } from "react";
+import React, { useState, createContext } from "react";
 import Nav from "./Nav";
 import Main from "./Main";
 import Footer from "./Footer";
@@ -8,8 +8,8 @@ import Footer from "./Footer";
 // context api 필수 세팅2 : 컴포넌트 감싸주기 with value
 // context api 필수 세팅3 : 사용 원하는 컴포에서 박스 불러오기
 
-export const ThemeContext = createContext(null); // 초기값
-export const Username = createContext(null); // 초기값
+export const ThemeContext = createContext(); // 초기값
+export const Username = createContext(); // 초기값
 
 function Usecontext() {
   const [isDark, setIsDark] = useState(false);
@@ -24,8 +24,6 @@ function Usecontext() {
 }
 
 function Page() {
-  const data = useContext(ThemeContext);
-  console.log(data);
   return (
     <div
       style={{
