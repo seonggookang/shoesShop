@@ -15,6 +15,7 @@ import Cart from "./Cart.js";
 import UsePractice from "./UsePractice";
 import CancelToken from "./CancelToken";
 import Scroll from "./Scroll";
+import Usecontext from "./useContext/Usecontext";
 let Detail = lazy(() => import("./Detail"));
 // lazy,suspense를 이용하면 Detail, Cart등의 컴포넌특라 필요할 때 import를 해준다.
 
@@ -127,6 +128,7 @@ function App() {
           </div>
           <Loading loading={loading} />
           <button
+            style={{ width: "300px", marginBottom: "5px" }}
             onClick={() => {
               let list = shoes.sort((a, b) => a.price - b.price);
               setShoes([...list]);
@@ -142,21 +144,37 @@ function App() {
               history.push("/useref");
             }}
           >
-            <button>Do you wanna study useRef?</button>
+            <button style={{ width: "300px", marginBottom: "5px" }}>
+              Do you wanna study useRef?
+            </button>
           </div>
           <div
             onClick={() => {
               history.push("/cancelToken");
             }}
           >
-            <button>cancelToken!!</button>
+            <button style={{ width: "300px", marginBottom: "5px" }}>
+              cancelToken!!
+            </button>
           </div>
           <div
             onClick={() => {
               history.push("/scroll");
             }}
           >
-            <button>Infinite Scroll!!</button>
+            <button style={{ width: "300px", marginBottom: "5px" }}>
+              Infinite Scroll!!
+            </button>
+          </div>
+
+          <div
+            onClick={() => {
+              history.push("/usecontext");
+            }}
+          >
+            <button style={{ width: "300px", marginBottom: "5px" }}>
+              Context API
+            </button>
           </div>
         </Route>
 
@@ -179,8 +197,13 @@ function App() {
         <Route exact path="/cancelToken">
           <CancelToken />
         </Route>
+
         <Route exact path="/scroll">
           <Scroll />
+        </Route>
+
+        <Route exact path="/usecontext">
+          <Usecontext />
         </Route>
       </Switch>
     </div>
