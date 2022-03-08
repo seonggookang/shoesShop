@@ -13,8 +13,8 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import Cart from "./Cart.js";
 import UsePractice from "./UsePractice";
+import CancelToken from "./CancelToken";
 import Scroll from "./Scroll";
-import Scroll2 from "./Scroll2";
 let Detail = lazy(() => import("./Detail"));
 // lazy,suspense를 이용하면 Detail, Cart등의 컴포넌특라 필요할 때 import를 해준다.
 
@@ -146,17 +146,17 @@ function App() {
           </div>
           <div
             onClick={() => {
+              history.push("/cancelToken");
+            }}
+          >
+            <button>cancelToken!!</button>
+          </div>
+          <div
+            onClick={() => {
               history.push("/scroll");
             }}
           >
             <button>Infinite Scroll!!</button>
-          </div>
-          <div
-            onClick={() => {
-              history.push("/scroll2");
-            }}
-          >
-            <button>Infinite Scroll!! version 2!!</button>
           </div>
         </Route>
 
@@ -176,11 +176,11 @@ function App() {
           <UsePractice />
         </Route>
 
+        <Route exact path="/cancelToken">
+          <CancelToken />
+        </Route>
         <Route exact path="/scroll">
           <Scroll />
-        </Route>
-        <Route exact path="/scroll2">
-          <Scroll2 />
         </Route>
       </Switch>
     </div>
