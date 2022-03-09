@@ -4,15 +4,13 @@ import { ThemeContext } from "./Usecontext";
 export default function Footer() {
   const { isDark, setIsDark } = useContext(ThemeContext);
 
-  console.log(isDark);
-
   const handleColor = () => {
     setIsDark(!isDark);
   };
   return (
     <footer
       style={{
-        position: "relative",
+        position: "absoulute",
         display: "flex",
         justifyContent: "flex-end",
         alignItems: "center",
@@ -26,8 +24,15 @@ export default function Footer() {
         color: "black",
       }}
     >
-      <button style={{ marginRight: "20px" }} onClick={handleColor}>
-        {isDark ? <div>Dark mode</div> : <div>White mode</div>}
+      <button
+        style={{ marginRight: "20px", position: "relative", height: "50%" }}
+        onClick={handleColor}
+      >
+        {isDark ? (
+          <div style={{ fontSize: "10px" }}>Dark mode</div>
+        ) : (
+          <div style={{ fontSize: "10px" }}>White mode</div>
+        )}
       </button>
     </footer>
   );

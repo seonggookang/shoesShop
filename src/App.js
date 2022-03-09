@@ -16,8 +16,9 @@ import UsePractice from "./UsePractice";
 import CancelToken from "./CancelToken";
 import Scroll from "./Scroll";
 import Usecontext from "./useContext/Usecontext";
+import Search from "./search/Search";
 let Detail = lazy(() => import("./Detail"));
-// lazy,suspense를 이용하면 Detail, Cart등의 컴포넌특라 필요할 때 import를 해준다.
+// lazy,suspense를 이용하면 해당 컴포넌트가 필요할 때 import를 해준다.
 
 export let 재고context = React.createContext();
 // createContext역할 : 같은 변수값을 공유할 범위생성
@@ -128,7 +129,7 @@ function App() {
           </div>
           <Loading loading={loading} />
           <button
-            style={{ width: "300px", marginBottom: "5px" }}
+            style={{ width: "300px", marginBottom: "5px", marginRight: "30px" }}
             onClick={() => {
               let list = shoes.sort((a, b) => a.price - b.price);
               setShoes([...list]);
@@ -144,7 +145,13 @@ function App() {
               history.push("/useref");
             }}
           >
-            <button style={{ width: "300px", marginBottom: "5px" }}>
+            <button
+              style={{
+                width: "300px",
+                marginBottom: "5px",
+                marginRight: "30px",
+              }}
+            >
               Do you wanna study useRef?
             </button>
           </div>
@@ -153,7 +160,13 @@ function App() {
               history.push("/cancelToken");
             }}
           >
-            <button style={{ width: "300px", marginBottom: "5px" }}>
+            <button
+              style={{
+                width: "300px",
+                marginBottom: "5px",
+                marginRight: "30px",
+              }}
+            >
               cancelToken!!
             </button>
           </div>
@@ -162,7 +175,13 @@ function App() {
               history.push("/scroll");
             }}
           >
-            <button style={{ width: "300px", marginBottom: "5px" }}>
+            <button
+              style={{
+                width: "300px",
+                marginBottom: "5px",
+                marginRight: "30px",
+              }}
+            >
               Infinite Scroll!!
             </button>
           </div>
@@ -172,8 +191,30 @@ function App() {
               history.push("/usecontext");
             }}
           >
-            <button style={{ width: "300px", marginBottom: "5px" }}>
+            <button
+              style={{
+                width: "300px",
+                marginBottom: "5px",
+                marginRight: "30px",
+              }}
+            >
               Context API
+            </button>
+          </div>
+
+          <div
+            onClick={() => {
+              history.push("/search");
+            }}
+          >
+            <button
+              style={{
+                width: "300px",
+                marginBottom: "5px",
+                marginRight: "30px",
+              }}
+            >
+              Search(by using includes)
             </button>
           </div>
         </Route>
@@ -204,6 +245,10 @@ function App() {
 
         <Route exact path="/usecontext">
           <Usecontext />
+        </Route>
+
+        <Route exact path="/search">
+          <Search />
         </Route>
       </Switch>
     </div>

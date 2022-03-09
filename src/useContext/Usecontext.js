@@ -30,7 +30,7 @@ function Page() {
         display: "block",
         position: "absolute",
         height: "100vh",
-        width: "80vw",
+        width: "100vw",
       }}
     >
       <Nav />

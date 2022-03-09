@@ -104,7 +104,7 @@ function Child1() {
 // 컴포넌트가 많아질때 유용. props가 너무 많으면 또 느려질 수 있으니 차후 확인.
 let Child2 = memo(function () {
   useEffect(() => {
-    console.log("렌더링됨2"); // memo를 사용함으로써 관련된게 바뀌면 렌더링
+    console.log("렌더링됨2"); // memo를 사용함으로써 관련된게 바뀌면 렌더링. 관련되지 않은건 무시.재렌더링 안함.
   });
   return <div>2222</div>;
 });
