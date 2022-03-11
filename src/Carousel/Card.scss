@@ -1,0 +1,143 @@
+.carousel_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 450px;
+  position: relative;
+  margin: 0 auto;
+
+  .left-arrow {
+    position: absolute;
+    top: 60px;
+    left: 5px;
+    font-size: 25px;
+    color: black;
+    z-index: 10;
+    cursor: pointer;
+    user-select: none;
+  }
+  .left-arrow-disabled {
+    position: absolute;
+    top: 60px;
+    left: 5px;
+    font-size: 25px;
+    color: black;
+    z-index: 10;
+    cursor: pointer;
+    user-select: none;
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+  .right-arrow {
+    position: absolute;
+    top: 60px;
+    right: 5px;
+    font-size: 25px;
+    color: black;
+    z-index: 10;
+    cursor: pointer;
+    user-select: none;
+  }
+  .right-arrow-disabled {
+    position: absolute;
+    top: 60px;
+    right: 5px;
+    font-size: 25px;
+    color: black;
+    z-index: 10;
+    opacity: 0.3;
+    user-select: none;
+    cursor: not-allowed;
+  }
+
+  .carousel_card_wrapper {
+    display: flex;
+    z-index: 5;
+    top: 0px;
+    height: 130px;
+
+    width: 379px;
+    overflow: hidden;
+    position: absolute;
+    border: 2px solid red;
+
+    .carousel_card {
+      cursor: grab;
+      z-index: 1;
+      min-width: 379px;
+      overflow: hidden;
+      position: relative;
+      border-radius: 6px;
+      width: 100%;
+      height: 130px;
+      display: flex;
+
+      &:active {
+        cursor: grabbing;
+      }
+
+      img {
+        margin: 25px 10px 10px 10px;
+        border-radius: 3px;
+        width: 90px;
+        height: 90px;
+        display: flex;
+      }
+      .carousel_info {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin: 25px 10px 10px 0px;
+        width: 100%;
+        height: 80px;
+
+        .carousel_category {
+          display: flex;
+          justify-content: flex-start;
+        }
+
+        .carousel_hashtag {
+          display: flex;
+          justify-content: flex-start;
+          font-size: 11px;
+          color: lightgray;
+          font-weight: 600;
+        }
+      }
+      .carousel_location {
+        display: flex;
+        justify-content: space-between;
+
+        .carousel_title {
+          font-weight: 700;
+        }
+
+        .carousel_title_detail {
+          font-size: 11px;
+          flex-grow: 1;
+        }
+      }
+
+      .carousel_score {
+        display: flex;
+        align-items: center;
+        font-size: 11px;
+
+        .carousel_score1 {
+          color: rgb(0, 204, 255);
+          font-weight: 700;
+        }
+        .carousel_score3 {
+          display: flex;
+          align-items: center;
+
+          .carousel_score33 {
+            color: red;
+            font-size: 13px;
+            font-weight: 700;
+          }
+        }
+      }
+    }
+  }
+}

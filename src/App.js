@@ -17,6 +17,10 @@ import CancelToken from "./CancelToken";
 import Scroll from "./Scroll";
 import Usecontext from "./useContext/Usecontext";
 import Search from "./search/Search";
+import ToDoList from "./Todo-list/TodoList";
+import { Carousel } from "bootstrap";
+import CarouselPractice from "./Carousel/Carousel";
+
 let Detail = lazy(() => import("./Detail"));
 // lazy,suspense를 이용하면 해당 컴포넌트가 필요할 때 import를 해준다.
 
@@ -217,6 +221,38 @@ function App() {
               Search(by using includes)
             </button>
           </div>
+
+          <div
+            onClick={() => {
+              history.push("/todolist");
+            }}
+          >
+            <button
+              style={{
+                width: "300px",
+                marginBottom: "5px",
+                marginRight: "30px",
+              }}
+            >
+              Todo-list
+            </button>
+          </div>
+
+          <div
+            onClick={() => {
+              history.push("/carousel");
+            }}
+          >
+            <button
+              style={{
+                width: "300px",
+                marginBottom: "5px",
+                marginRight: "30px",
+              }}
+            >
+              Carousel
+            </button>
+          </div>
         </Route>
 
         <Route exact path="/detail/:id">
@@ -250,6 +286,14 @@ function App() {
         <Route exact path="/search">
           <Search />
         </Route>
+
+        <Route exact path="/todolist">
+          <ToDoList />
+        </Route>
+
+        <Route exact path="/carousel">
+          <CarouselPractice />
+        </Route>
       </Switch>
     </div>
   );
@@ -260,16 +304,15 @@ function Loading(props) {
 }
 
 function Card(props) {
-  console.log("props :", props);
   let 재고 = useContext(재고context);
-  console.log("재고 : ", 재고);
+
   // 뜻 : Card 컴포넌트는 괄호 안의 것(재고context)로 감싸져있다.
   // 이제 Card에서도 재고라는 state를 사용가능!
 
   let history = useHistory();
 
   // 여기서 해당 재고량을 가져오는 함수를 만들어서 id값이랑 재고의 순번이랑 맞춰서 가져오기
-  console.log(props.shoes.left);
+
   return (
     <div
       className="product"

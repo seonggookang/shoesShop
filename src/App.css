@@ -76,6 +76,23 @@
   }
 }
 
+.title {
+  text-align: center;
+  background-color: grey;
+  color: gold;
+  margin: 0;
+}
+body {
+  margin: 0;
+}
+.todo-app {
+  background-color: grey;
+  color: gold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
