@@ -6,7 +6,12 @@ import { faArrowRight, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 function CarouselCard() {
   const [current, setCurrent] = useState(0);
-  const [x, setX] = useState(0);
+  const [startPoint, setStartPoint] = useState(0);
+  const [endpoint, setEndpoint] = useState(0);
+  const [startY, setStartY] = useState(0);
+  const [EndY, setEndY] = useState(0);
+  const [show, setShow] = useState(false);
+
   const handleLeft = () => {
     setCurrent(current - 1);
   };
@@ -15,23 +20,40 @@ function CarouselCard() {
     setCurrent(current + 1);
   };
 
+  const result = startPoint - endpoint;
+  const resultY = EndY - startY;
+
   const handleMouseDown = (e) => {
-    console.log(e.clientX);
+    console.log("시작 x,y : ", e.clientX, e.pageY);
+    setStartPoint(e.clientX);
+    setStartY(e.pageY);
   };
-  document.addEventListener("mousedown", handleMouseDown);
-
-  const handleMouseMove = (e) => {
-    console.log(e.clientX);
-    // e.client == undefined ? 0 : setX(e.clientX);
-
-    console.log(e.clientX);
-    return x;
+  const handleMouseUp = (e) => {
+    console.log("도착 x,y : ", e.clientX, e.pageY);
+    setEndpoint(e.clientX);
+    setEndY(e.pageY);
   };
-  document.addEventListener("mousemove ", handleMouseMove);
+  console.log("resultY : ", resultY);
+  useEffect(() => {
+    if (resultY > 30) {
+      setShow(true);
+    } else {
+      if (result > 0) {
+        if (current < 9) {
+          handleRight();
+        }
+      } else if (result < 0) {
+        if (current > 0) {
+          handleLeft();
+        }
+      } else {
+        if (startPoint !== endpoint) {
+          setCurrent(0);
+        }
+      }
+    }
+  }, [endpoint]); // 유레카
 
-  // useEffect(() => {
-  //   handleMouseMove();
-  // }, [x]);
   return (
     <div className="carousel_container">
       {current !== 0 ? (
@@ -44,13 +66,20 @@ function CarouselCard() {
         <FontAwesomeIcon icon={faArrowLeft} className="left-arrow-disabled" />
       )}
 
-      <div className="carousel_card_wrapper">
+      <div
+        className="carousel_card_wrapper"
+        onMouseDown={handleMouseDown}
+        onMouseUp={handleMouseUp}
+        style={{
+          opacity: show ? 0 : 1,
+          transform: `translateY(${show ? 50 : 0}px)`,
+          transition: "0.5s",
+        }}
+      >
         {shops.map((shop, idx) => {
           return (
             <div
               className="carousel_card"
-              // 여기 안에서 clientX,clientY
-              onChange={handleMouseDown}
               key={shop.nm}
               style={{
                 transform: `translateX(-${

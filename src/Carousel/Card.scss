@@ -2,23 +2,27 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 450px;
+  width: 60px;
   position: relative;
   margin: 0 auto;
 
   .left-arrow {
     position: absolute;
-    top: 60px;
+    top: 0px;
     left: 5px;
     font-size: 25px;
     color: black;
     z-index: 10;
     cursor: pointer;
     user-select: none;
+    &:hover {
+      transform: scale(1.2);
+      transition: 0.3s;
+    }
   }
   .left-arrow-disabled {
     position: absolute;
-    top: 60px;
+    top: 0px;
     left: 5px;
     font-size: 25px;
     color: black;
@@ -30,17 +34,21 @@
   }
   .right-arrow {
     position: absolute;
-    top: 60px;
+    top: 0px;
     right: 5px;
     font-size: 25px;
     color: black;
     z-index: 10;
     cursor: pointer;
     user-select: none;
+    &:hover {
+      transform: scale(1.2);
+      transition: 0.3s;
+    }
   }
   .right-arrow-disabled {
     position: absolute;
-    top: 60px;
+    top: 0px;
     right: 5px;
     font-size: 25px;
     color: black;
@@ -52,24 +60,24 @@
 
   .carousel_card_wrapper {
     display: flex;
-    z-index: 5;
-    top: 0px;
+    z-index: 0;
+    top: 30px;
     height: 130px;
-
     width: 379px;
-    overflow: hidden;
     position: absolute;
     border: 2px solid red;
+    border-radius: 8px;
 
     .carousel_card {
+      border: 1px solid black;
       cursor: grab;
       z-index: 1;
-      min-width: 379px;
+      min-width: 376px;
       overflow: hidden;
       position: relative;
       border-radius: 6px;
       width: 100%;
-      height: 130px;
+      height: 129px;
       display: flex;
 
       &:active {
@@ -82,6 +90,7 @@
         width: 90px;
         height: 90px;
         display: flex;
+        z-index: -1;
       }
       .carousel_info {
         display: flex;
