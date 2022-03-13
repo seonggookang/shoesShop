@@ -1,4 +1,4 @@
-매일 알아가고 있는 것들을 Toy Project식으로 이곳에 담고 있습니다.
+# 매일 알아가고 있는 것들을 Toy Project식으로 이곳에 담고 있습니다.
 
 - Todolist
 - Parallax
