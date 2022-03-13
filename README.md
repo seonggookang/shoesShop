@@ -5,3 +5,5 @@
 - Infinite Scroll
 - Search filtering
 - Carousel(swipe 기능, without library)
+
+![dining](https://user-images.githubusercontent.com/57793940/158047965-1cc229f1-1b16-46fb-8305-939c6358155d.gif)
