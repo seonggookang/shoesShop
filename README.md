@@ -6,4 +6,5 @@
 - Search filtering
 - Carousel(swipe 기능, without library)
 
-![dining](https://user-images.githubusercontent.com/57793940/158047965-1cc229f1-1b16-46fb-8305-939c6358155d.gif)
+
+![Swipe](https://user-images.githubusercontent.com/57793940/158048322-98e57d04-fbe5-4845-afe0-4486f8db01bd.gif)
