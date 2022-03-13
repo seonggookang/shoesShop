@@ -2,5 +2,6 @@
 
 - Todolist
 - Parallax
+- Infinite Scroll
 - Search filtering
 - Carousel(swipe 기능, without library)
