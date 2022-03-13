@@ -2,5 +2,5 @@
 
 - Todolist
 - Parallax
-- Sarch filtering
+- Search filtering
 - Carousel(swipe 기능, without library)
